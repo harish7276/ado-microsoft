@@ -1,4 +1,4 @@
-# test vnet creating
+# dev vnet creating
 resource "azurerm_virtual_network" "example" {
   name                = "example-network"
   location            = "West Europe"
