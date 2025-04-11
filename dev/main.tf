@@ -13,4 +13,11 @@ resource "azurerm_virtual_network" "dev" {
   address_space       = ["10.1.0.0/16"]
 }
 
+resource "azurerm_virtual_network" "harsha" {
+  name                = "harsha-dev-vnet"
+  location            = "West Europe"
+  resource_group_name = "sanofi-dev-rg"
+  address_space       = ["10.4.0.0/16"]
+}
+
 

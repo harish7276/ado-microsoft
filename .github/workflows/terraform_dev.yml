@@ -3,11 +3,11 @@ name: 'Terraform-dev-environment'
 on:
   push:
     paths:
-      - 'prod/**'
+      - 'dev/**'
 
   pull_request:
     paths:
-      - 'prod/**'
+      - 'dev/**'
 
 env:
   TF_LOG: INFO
