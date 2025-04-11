@@ -3,7 +3,11 @@ name: 'Terraform'
 on:
   push:
     paths:
-      - 'prod/'
+      - 'prod/**'
+
+  pull_request:
+    paths:
+      - 'prod/**'
 
 env:
   TF_LOG: INFO
