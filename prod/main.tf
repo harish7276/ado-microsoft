@@ -20,7 +20,7 @@ resource "azurerm_virtual_network" "harishprod" {
   address_space       = ["10.3.0.0/16"]
 }
 
-resource "azurerm_virtual_network" "harishprod" {
+resource "azurerm_virtual_network" "harishprodnew" {
   name                = "harish-prod-vnet-new"
   location            = "West Europe"
   resource_group_name = "sanofi-dev-rg"
