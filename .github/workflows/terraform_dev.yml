@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Terraform-dev-environment'
 
 on:
   push:
@@ -14,7 +14,7 @@ env:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform - dev'
     runs-on: ubuntu-latest
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
