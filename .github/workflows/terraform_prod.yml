@@ -5,7 +5,7 @@ on:
     paths:
       - 'prod/**'
 
-    pull_request:
+  pull_request:
     paths:
       - 'prod/**'
 

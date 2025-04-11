@@ -1,4 +1,4 @@
-# prod vnet creating
+# prod vnet creating new
 resource "azurerm_virtual_network" "harish" {
   name                = "harish-network"
   location            = "West Europe"
