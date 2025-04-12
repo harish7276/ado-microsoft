@@ -28,7 +28,8 @@ variable "subnets" {
   type = list(object({
     name             = string
     address_prefixes = list(string)
-    service_endpoints = optional(list(string))
   }))
-  description = "List of subnets with address prefixes and optional service endpoints"
+  description = "List of subnets"
+  default     = []
 }
+
