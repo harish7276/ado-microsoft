@@ -40,3 +40,31 @@ module "vnet_west" {
     }
   ]
 }
+
+
+module "vm1" {
+  source              = "./modules/virtual_machine"
+  vm_name             = "vm-east-1"
+  location            = "East US"
+  resource_group_name = "rg-network"
+  subnet_id           = module.vnet_east.subnet_ids["subnet1"]  # If you expose subnet_ids as output
+  admin_username      = data.azurerm_key_vault_secret.admin_username.value
+  admin_password      = data.azurerm_key_vault_secret.admin_password.value
+  tags = {
+    environment = "dev"
+  }
+}
+
+module "vm2" {
+  source              = "./modules/virtual_machine"
+  vm_name             = "vm-west-1"
+  location            = "West US"
+  resource_group_name = "rg-network"
+  subnet_id           = module.vnet_west.subnet_ids["backend"]
+  admin_username      = data.azurerm_key_vault_secret.admin_username.value
+  admin_password      = data.azurerm_key_vault_secret.admin_password.value
+  tags = {
+    environment = "prod"
+  }
+}
+
