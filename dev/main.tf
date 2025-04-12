@@ -50,6 +50,7 @@ module "vm1" {
   subnet_id           = module.vnet_east.subnet_ids["subnet1"] # If you expose subnet_ids as output
   admin_username      = data.azurerm_key_vault_secret.admin_username.value
   admin_password      = data.azurerm_key_vault_secret.admin_password.value
+  create_public_ip    = true
   tags = {
     environment = "dev"
   }
@@ -63,6 +64,7 @@ module "vm2" {
   subnet_id           = module.vnet_west.subnet_ids["backend"]
   admin_username      = data.azurerm_key_vault_secret.admin_username.value
   admin_password      = data.azurerm_key_vault_secret.admin_password.value
+  create_public_ip    = true
   tags = {
     environment = "prod"
   }

@@ -33,3 +33,10 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "create_public_ip" {
+  description = "Whether to create a public IP for the VM"
+  type        = bool
+  default     = false
+}
+
