@@ -3,7 +3,7 @@ module "vnet_east" {
   vnet_name           = "vnet-east"
   address_space       = ["10.10.0.0/16"]
   location            = "East US"
-  resource_group_name = "rg-network"
+  resource_group_name = "sanofi-dev-rg"
   tags = {
     environment = "dev"
   }
@@ -25,7 +25,7 @@ module "vnet_west" {
   vnet_name           = "vnet-west"
   address_space       = ["10.20.0.0/16"]
   location            = "West US"
-  resource_group_name = "rg-network"
+  resource_group_name = "sanofi-dev-rg"
   tags = {
     environment = "prod"
   }
