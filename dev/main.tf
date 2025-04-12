@@ -43,7 +43,7 @@ module "vnet_west" {
 
 
 module "vm1" {
-  source              = "./modules/compute"
+  source              = "../modules/compute"
   vm_name             = "vm-east-1"
   location            = "East US"
   resource_group_name = "rg-network"
@@ -56,7 +56,7 @@ module "vm1" {
 }
 
 module "vm2" {
-  source              = "./modules/compute"
+  source              = "../modules/compute"
   vm_name             = "vm-west-1"
   location            = "West US"
   resource_group_name = "rg-network"
