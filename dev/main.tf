@@ -1,68 +1,42 @@
-module "dev_vnet_1" {
-  source = "../modules/network"
-
-  environment         = var.environment
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  vnet_name           = var.vnet_name
-  vnet_address_prefix = var.vnet_address_prefix
-  subnets             = var.subnets
-}
-
-module "dev_nsg_1" {
-  source = "../modules/nsg"
-
-  nsg_name = var.nsg_name
-  nsg_rules = [
+module "vnet_east" {
+  source              = "../modules/network"
+  vnet_name           = "vnet-east"
+  address_space       = ["10.10.0.0/16"]
+  location            = "East US"
+  resource_group_name = "rg-network"
+  tags = {
+    environment = "dev"
+  }
+  subnets = [
     {
-      name                       = "AllowSSH"
-      priority                   = 100
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "*"
-      source_port_range          = "*"
-      destination_port_range     = "3389"
-      source_address_prefix      = "*"
-      destination_address_prefix = "*"
+      name             = "subnet1"
+      address_prefixes = ["10.10.1.0/24"]
     },
     {
-      name                       = "Allow22"
-      priority                   = 110
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "*"
-      source_port_range          = "*"
-      destination_port_range     = "22"
-      source_address_prefix      = "*"
-      destination_address_prefix = "*"
-    },
-    {
-      name                       = "Allow80"
-      priority                   = 120
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "*"
-      source_port_range          = "*"
-      destination_port_range     = "80"
-      source_address_prefix      = "*"
-      destination_address_prefix = "*"
+      name             = "subnet2"
+      address_prefixes = ["10.10.2.0/24"]
+      service_endpoints = ["Microsoft.Storage"]
     }
   ]
-  resource_group_name = module.dev_vnet_1.resource_group
-  location            = module.dev_vnet_1.location
-  subnet_id           = module.dev_vnet_1.subnet_id
 }
 
-module "dev_compute" {
-  source              = "../modules/compute"
-  environment         = module.dev_nsg_1.environment
-  resource_group_name = module.dev_vnet_1.resource_group
-  location            = module.dev_vnet_1.location
-  subnet_id           = module.dev_vnet_1.subnet_id
-  public_vm_size      = var.public_vm_size
-  private_vm_size     = var.private_vm_size
-  public_key_path     = "../modules/compute/publickey.pub" # key stored in the compute folder. Using keyvault is recommanded
-  pem_file_path       = "../modules/compute/pemkey.pem"
-  encoded_path        = "../modules/compute/userdata.tpl"
-  script_path         = "../modules/compute/userdata.sh"
+module "vnet_west" {
+  source              = "../modules/network"
+  vnet_name           = "vnet-west"
+  address_space       = ["10.20.0.0/16"]
+  location            = "West US"
+  resource_group_name = "rg-network"
+  tags = {
+    environment = "prod"
+  }
+  subnets = [
+    {
+      name             = "backend"
+      address_prefixes = ["10.20.1.0/24"]
+    },
+    {
+      name             = "frontend"
+      address_prefixes = ["10.20.2.0/24"]
+    }
+  ]
 }
